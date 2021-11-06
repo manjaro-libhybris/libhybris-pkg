@@ -2,14 +2,15 @@
 pkgname=libhybris-git
 provides=('libhybris')
 _pkgbase=libhybris
-pkgver=1445.1b6090a
+pkgver=1533.fa2bb0c
 pkgrel=1
-arch=('armv7h' 'aarch64')
+arch=('armv7h' 'aarch64' 'x86' 'x86_64')
 url="https://github.com/libhybris/libhybris"
 license=('Apache')
-depends=('wayland')
-makedepends=('git' 'mesa' android-headers)
-source=("libhybris::git+https://github.com/libhybris/libhybris")
+depends=('wayland' 'libglvnd')
+makedepends=('git' 'mesa' 'android-headers')
+conflicts=('ocl-icd')
+source=("libhybris::git+https://github.com/manjaro-libhybris/libhybris")
 md5sums=('SKIP')
 options=(debug !strip)
 
@@ -35,7 +36,8 @@ build() {
     --with-android-headers=/usr/include/android \
     --enable-arch=arm64 \
     --with-default-hybris-ld-library-path=/usr/libexec/droid-hybris/system/lib64:/system/lib64:/vendor/lib64 \
-    --enable-property-cache
+    --enable-property-cache \
+    --enable-glvnd
   make
 }
 
@@ -49,7 +51,7 @@ package() {
 
   cd "${pkgdir}/usr/include"
   # Move libhybris-provided headers into hybris dir
-  mv CL EGL GLES GLES2 KHR VG hybris
+  mv CL EGL GLES GLES2 GLES3 KHR VG hybris
 
   # Symlink eglhybris.h
   mkdir -p EGL
