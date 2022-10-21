@@ -2,7 +2,7 @@
 pkgname=libhybris-glvnd
 provides=('libhybris')
 _pkgbase=libhybris
-pkgver=1569.03c5ec6
+pkgver=1578.ff79cb0
 pkgrel=1
 _commit=ff79cb05ce9e7da981e417a8b2d99ea870466892
 arch=('armv7h' 'aarch64' 'x86_64')
@@ -10,7 +10,7 @@ url="https://github.com/libhybris/libhybris"
 license=('Apache')
 depends=('wayland' 'libglvnd')
 makedepends=('git' 'mesa' 'android-headers-30' 'vulkan-headers')
-conflicts=('ocl-icd' 'libhybris-28-glvnd' 'libhybris-29-glvnd')
+conflicts=('libhybris-28-glvnd' 'libhybris-29-glvnd')
 provides=('libhybris')
 source=("libhybris::git+https://github.com/manjaro-libhybris/libhybris#commit=${_commit}")
 md5sums=('SKIP')
@@ -61,6 +61,10 @@ package() {
   mv CL EGL GLES GLES2 GLES3 KHR hybris
 
   cd "${pkgdir}/usr/lib"
+  # Avoid conflict with ocl-icd
+  mv libOpenCL.so* libhybris/
+  rm pkgconfig/OpenCL.pc
+
   # Avoid conflict with vulkan-icd-loader
   mv libvulkan.so* libhybris/
 
