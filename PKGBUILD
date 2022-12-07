@@ -2,9 +2,9 @@
 pkgname=libhybris-glvnd
 provides=('libhybris')
 _pkgbase=libhybris
-pkgver=1578.ff79cb0
+pkgver=1583.21faf7a
 pkgrel=1
-_commit=ff79cb05ce9e7da981e417a8b2d99ea870466892
+_commit=21faf7a1e5a0e3c5932f7d9a607351c9092c1717
 arch=('armv7h' 'aarch64' 'x86_64')
 url="https://github.com/libhybris/libhybris"
 license=('Apache')
@@ -67,6 +67,10 @@ package() {
 
   # Avoid conflict with vulkan-icd-loader
   mv libvulkan.so* libhybris/
+
+  # Avoid conflict with libcamera
+  mv libcamera.so* libhybris/
+  rm -f ${pkgdir}/usr/lib/pkgconfig/libcamera.pc
 
   # Symlink eglhybris.h
   mkdir -p EGL
