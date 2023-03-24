@@ -1,18 +1,19 @@
 # Contributor: Michael Serpieri <mickybart@pygoscelis.org>
-pkgname=libhybris-glvnd
+
+pkgname=libhybris
 provides=('libhybris')
 _pkgbase=libhybris
-pkgver=1583.21faf7a
+pkgver=1901.3f9afd7
 pkgrel=1
-_commit=21faf7a1e5a0e3c5932f7d9a607351c9092c1717
+_commit=3f9afd7acef22a1aefb807c4cf35d2bf73e905c4
 arch=('armv7h' 'aarch64' 'x86_64')
 url="https://github.com/libhybris/libhybris"
 license=('Apache')
 depends=('wayland' 'libglvnd')
-makedepends=('git' 'mesa' 'android-headers-30' 'vulkan-headers')
-conflicts=('libhybris-28-glvnd' 'libhybris-29-glvnd')
-provides=('libhybris')
-source=("libhybris::git+https://github.com/manjaro-libhybris/libhybris#commit=${_commit}")
+makedepends=('git' 'mesa' 'android-headers' 'vulkan-headers' 'quilt' 'python3'
+             'patchelf' 'binutils' 'libglvnd' 'pkgconf' 'libxext' 'libxcb'
+             'wayland' 'egl-wayland')
+source=("libhybris::git+https://github.com/droidian/libhybris#commit=${_commit}")
 md5sums=('SKIP')
 options=(debug !strip)
 
