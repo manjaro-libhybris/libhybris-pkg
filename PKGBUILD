@@ -1,6 +1,7 @@
+# Maintainer: Bardia Moshiri <fakeshell@bardia.tech>
 # Contributor: Michael Serpieri <mickybart@pygoscelis.org>
 
-pkgname=libhybris
+pkgname=libhybris-all
 provides=('libhybris')
 _pkgbase=libhybris
 pkgver=1901.3f9afd7
@@ -12,6 +13,7 @@ license=('Apache')
 depends=('wayland' 'libglvnd')
 makedepends=('wayland' 'android-headers' 'quilt' 'python3' 'egl-wayland' 'mesa'
              'patchelf' 'binutils' 'libglvnd' 'pkgconf' 'libxext' 'libxcb' 'git')
+conflicts=('libhybris-glvnd' 'libhybris-git' 'libhybris-28-glvnd' 'libhybris-29-glvnd')
 source=("libhybris::git+https://github.com/droidian/libhybris#commit=${_commit}")
 md5sums=('SKIP')
 options=(debug !strip)
