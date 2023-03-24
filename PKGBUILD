@@ -10,9 +10,8 @@ arch=('armv7h' 'aarch64' 'x86_64')
 url="https://github.com/libhybris/libhybris"
 license=('Apache')
 depends=('wayland' 'libglvnd')
-makedepends=('git' 'mesa' 'android-headers' 'vulkan-headers' 'quilt' 'python3'
-             'patchelf' 'binutils' 'libglvnd' 'pkgconf' 'libxext' 'libxcb'
-             'wayland' 'egl-wayland')
+makedepends=('wayland' 'android-headers' 'quilt' 'python3' 'egl-wayland' 'mesa'
+             'patchelf' 'binutils' 'libglvnd' 'pkgconf' 'libxext' 'libxcb' 'git')
 source=("libhybris::git+https://github.com/droidian/libhybris#commit=${_commit}")
 md5sums=('SKIP')
 options=(debug !strip)
@@ -65,9 +64,6 @@ package() {
   # Avoid conflict with ocl-icd
   mv libOpenCL.so* libhybris/
   rm pkgconfig/OpenCL.pc
-
-  # Avoid conflict with vulkan-icd-loader
-  mv libvulkan.so* libhybris/
 
   # Avoid conflict with libcamera
   mv libcamera.so* libhybris/
